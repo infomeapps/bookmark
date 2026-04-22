@@ -14,5 +14,9 @@
   {
     "name": "Ontact 발행 시스템",
     "url": "https://infomeapps.github.io/ontact-unlock-manager/"
+  },
+  {
+    "name": "디지파이넥스 트리 테스트",
+    "url": "https://temp-test-file.s3.ap-northeast-2.amazonaws.com/test_tree_app.html"
   }
 ]
