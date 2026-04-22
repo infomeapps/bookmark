@@ -1,0 +1,18 @@
+[
+  {
+    "name": "디지파이넥스 트리에서 오류 통계 페이지",
+    "url": "https://temp-test-file.s3.ap-northeast-2.amazonaws.com/stats-page/index.html"
+  },
+  {
+    "name": "똑똑관리페이지",
+    "url": "http://staging-adminweb.ttogttog.net/adm/admLogin.do"
+  },
+  {
+    "name": "똑똑 관리페이지(데브)",
+    "url": "http://dev-adminweb.ttogttog.net/adm/admLogin.do"
+  },
+  {
+    "name": "Ontact 발행 시스템",
+    "url": "https://infomeapps.github.io/ontact-unlock-manager/"
+  }
+]

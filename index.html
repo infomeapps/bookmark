@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>유용한 링크</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card:hover {
+      border-color: #c0c0c0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .card-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      word-break: break-word;
+    }
+
+    .card-url {
+      font-size: 0.85rem;
+      color: #888;
+      word-break: break-all;
+    }
+
+    .status {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+    }
+
+    .error {
+      color: #d04545;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e5e5;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>유용한 링크</h1>
+      <p class="subtitle">자주 사용하는 사이트 모음</p>
+    </header>
+
+    <div id="content" class="status">로딩 중...</div>
+
+    <footer>
+      <span id="count"></span>
+    </footer>
+  </div>
+
+  <script>
+    async function loadBookmarks() {
+      const content = document.getElementById('content');
+      const count = document.getElementById('count');
+
+      try {
+        const response = await fetch('bookmarks.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status);
+        }
+        const bookmarks = await response.json();
+
+        if (!Array.isArray(bookmarks) || bookmarks.length === 0) {
+          content.className = 'status';
+          content.textContent = '북마크가 없습니다.';
+          return;
+        }
+
+        content.className = 'grid';
+        content.innerHTML = '';
+
+        bookmarks.forEach(item => {
+          const card = document.createElement('a');
+          card.className = 'card';
+          card.href = item.url;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+
+          const name = document.createElement('div');
+          name.className = 'card-name';
+          name.textContent = item.name;
+
+          const url = document.createElement('div');
+          url.className = 'card-url';
+          url.textContent = item.url;
+
+          card.appendChild(name);
+          card.appendChild(url);
+          content.appendChild(card);
+        });
+
+        count.textContent = '총 ' + bookmarks.length + '개의 링크';
+      } catch (err) {
+        content.className = 'status error';
+        content.textContent = 'bookmarks.json을 불러올 수 없습니다: ' + err.message;
+      }
+    }
+
+    loadBookmarks();
+  </script>
+</body>
+</html>
