@@ -22,5 +22,9 @@
   {
     "name": "미콘캐시 관리페이지",
     "url": "http://payadmin.meconcash.com/adm/admLogin.do"
+  },
+  {
+    "name": "똑똑 예뮬 데브( &MODE=DEVAPP 삭제시 상용)",
+    "url": "https://ttogttog-web-simulator.s3.ap-northeast-2.amazonaws.com/index.html#/IntroduceApp?language=ko&fn_version=18&LOG=SHOW&isEmulator=1&MODE=DEVAPP"
   }
 ]
